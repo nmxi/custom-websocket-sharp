@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Net;
 using System.Security.Principal;
 
 namespace WebSocketSharp.Net.WebSockets
@@ -42,6 +43,7 @@ namespace WebSocketSharp.Net.WebSockets
   {
     #region Private Fields
 
+    private IPEndPoint _iPEndPoint;
     private HttpListenerContext _context;
     private WebSocket           _websocket;
 
@@ -54,7 +56,7 @@ namespace WebSocketSharp.Net.WebSockets
     )
     {
       _context = context;
-      _websocket = new WebSocket (this, protocol);
+      _websocket = new WebSocket (this, protocol, _iPEndPoint);
     }
 
     #endregion

@@ -37,6 +37,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
+using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Principal;
@@ -69,6 +70,7 @@ namespace WebSocketSharp.Net.WebSockets
     #region Internal Constructors
 
     internal TcpListenerWebSocketContext (
+      IPEndPoint iPEndPoint,
       TcpClient tcpClient,
       string protocol,
       bool secure,
@@ -107,7 +109,7 @@ namespace WebSocketSharp.Net.WebSockets
       _userEndPoint = sock.RemoteEndPoint;
 
       _request = HttpRequest.ReadRequest (_stream, 90000);
-      _websocket = new WebSocket (this, protocol);
+      _websocket = new WebSocket (this, protocol, iPEndPoint);
     }
 
     #endregion

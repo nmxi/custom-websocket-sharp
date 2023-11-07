@@ -45,6 +45,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Cryptography;
@@ -52,6 +53,10 @@ using System.Text;
 using System.Threading;
 using WebSocketSharp.Net;
 using WebSocketSharp.Net.WebSockets;
+using Cookie = WebSocketSharp.Net.Cookie;
+using CookieCollection = WebSocketSharp.Net.CookieCollection;
+using HttpStatusCode = WebSocketSharp.Net.HttpStatusCode;
+using NetworkCredential = WebSocketSharp.Net.NetworkCredential;
 
 namespace WebSocketSharp
 {
@@ -120,6 +125,9 @@ namespace WebSocketSharp
     private const string                   _version = "13";
     private TimeSpan                       _waitTime;
 
+    private IPEndPoint _localEndPoint;
+    public Action<string> onLogEvent;
+
     #endregion
 
     #region Internal Fields
@@ -167,35 +175,37 @@ namespace WebSocketSharp
     #region Internal Constructors
 
     // As server
-    internal WebSocket (HttpListenerWebSocketContext context, string protocol)
+    internal WebSocket(HttpListenerWebSocketContext context, string protocol, IPEndPoint iPEndPoint)
     {
       _context = context;
       _protocol = protocol;
+      _localEndPoint = iPEndPoint;
 
       _closeContext = context.Close;
       _log = context.Log;
       _message = messages;
       _secure = context.IsSecureConnection;
       _stream = context.Stream;
-      _waitTime = TimeSpan.FromSeconds (1);
+      _waitTime = TimeSpan.FromSeconds(1);
 
-      init ();
+      init();
     }
 
     // As server
-    internal WebSocket (TcpListenerWebSocketContext context, string protocol)
+    internal WebSocket(TcpListenerWebSocketContext context, string protocol, IPEndPoint iPEndPoint)
     {
       _context = context;
       _protocol = protocol;
+      _localEndPoint = iPEndPoint;
 
       _closeContext = context.Close;
       _log = context.Log;
       _message = messages;
       _secure = context.IsSecureConnection;
       _stream = context.Stream;
-      _waitTime = TimeSpan.FromSeconds (1);
+      _waitTime = TimeSpan.FromSeconds(1);
 
-      init ();
+      init();
     }
 
     #endregion
@@ -254,7 +264,7 @@ namespace WebSocketSharp
     ///   <paramref name="protocols"/> contains a value twice.
     ///   </para>
     /// </exception>
-    public WebSocket (string url, params string[] protocols)
+    public WebSocket (IPEndPoint localEndPoint, string url, params string[] protocols)
     {
       if (url == null)
         throw new ArgumentNullException ("url");
@@ -273,6 +283,8 @@ namespace WebSocketSharp
 
         _protocols = protocols;
       }
+
+      _localEndPoint = localEndPoint;
 
       _base64Key = CreateBase64Key ();
       _client = true;
@@ -1303,6 +1315,8 @@ namespace WebSocketSharp
     // As client
     private bool connect ()
     {
+      onLogEvent?.Invoke($"Connect to {_uri}");
+
       if (_readyState == WebSocketState.Connecting) {
         _log.Trace ("The connect process is in progress.");
 
@@ -2271,7 +2285,10 @@ namespace WebSocketSharp
     private void setClientStream ()
     {
       if (_proxyUri != null) {
-        _tcpClient = new TcpClient (_proxyUri.DnsSafeHost, _proxyUri.Port);
+        _tcpClient = new TcpClient(_localEndPoint);
+        _tcpClient.Connect(_proxyUri.DnsSafeHost, _proxyUri.Port);
+        onLogEvent?.Invoke($"Local End Point is {_localEndPoint}");
+        //_tcpClient = new TcpClient (_proxyUri.DnsSafeHost, _proxyUri.Port);
         _stream = _tcpClient.GetStream ();
 
         var res = sendProxyConnectRequest ();
@@ -2282,7 +2299,9 @@ namespace WebSocketSharp
           throw new WebSocketException (msg);
       }
       else {
-        _tcpClient = new TcpClient (_uri.DnsSafeHost, _uri.Port);
+        _tcpClient = new TcpClient ();
+        _tcpClient.Client.Bind(_localEndPoint);
+        _tcpClient.Connect(_uri.DnsSafeHost, _uri.Port);
         _stream = _tcpClient.GetStream ();
       }
 

@@ -38,6 +38,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
@@ -45,6 +46,9 @@ using System.Text;
 using System.Threading;
 using WebSocketSharp.Net;
 using WebSocketSharp.Net.WebSockets;
+using AuthenticationSchemes = WebSocketSharp.Net.AuthenticationSchemes;
+using HttpStatusCode = WebSocketSharp.Net.HttpStatusCode;
+using NetworkCredential = WebSocketSharp.Net.NetworkCredential;
 
 namespace WebSocketSharp.Server
 {
@@ -789,7 +793,7 @@ namespace WebSocketSharp.Server
             state => {
               try {
                 var ctx = new TcpListenerWebSocketContext (
-                            cl, null, _secure, _sslConfigInUse, _log
+                            new IPEndPoint(_address, _port), cl, null, _secure, _sslConfigInUse, _log
                           );
 
                 processRequest (ctx);
