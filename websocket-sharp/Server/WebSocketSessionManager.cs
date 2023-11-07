@@ -35,7 +35,7 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 
-namespace WebSocketSharp.Server
+namespace CustomWebSocketSharp.Server
 {
   /// <summary>
   /// Provides the management function for the sessions in a WebSocket service.

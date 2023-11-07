@@ -51,14 +51,14 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using WebSocketSharp.Net;
-using WebSocketSharp.Net.WebSockets;
-using Cookie = WebSocketSharp.Net.Cookie;
-using CookieCollection = WebSocketSharp.Net.CookieCollection;
-using HttpStatusCode = WebSocketSharp.Net.HttpStatusCode;
-using NetworkCredential = WebSocketSharp.Net.NetworkCredential;
+using CustomWebSocketSharp.Net;
+using CustomWebSocketSharp.Net.WebSockets;
+using Cookie = CustomWebSocketSharp.Net.Cookie;
+using CookieCollection = CustomWebSocketSharp.Net.CookieCollection;
+using HttpStatusCode = CustomWebSocketSharp.Net.HttpStatusCode;
+using NetworkCredential = CustomWebSocketSharp.Net.NetworkCredential;
 
-namespace WebSocketSharp
+namespace CustomWebSocketSharp
 {
   /// <summary>
   /// Implements the WebSocket interface.
@@ -1315,8 +1315,6 @@ namespace WebSocketSharp
     // As client
     private bool connect ()
     {
-      onLogEvent?.Invoke($"Connect to {_uri}");
-
       if (_readyState == WebSocketState.Connecting) {
         _log.Trace ("The connect process is in progress.");
 
@@ -2287,7 +2285,9 @@ namespace WebSocketSharp
       if (_proxyUri != null) {
         _tcpClient = new TcpClient();
         _tcpClient.Client.Bind(_localEndPoint);
+        onLogEvent?.Invoke($"LocalEndPoint : {_localEndPoint}");
         _tcpClient.Connect(_uri.DnsSafeHost, _uri.Port);
+        onLogEvent?.Invoke($"Connect to {_uri}");
         _stream = _tcpClient.GetStream ();
 
         var res = sendProxyConnectRequest ();
@@ -2300,7 +2300,9 @@ namespace WebSocketSharp
       else {
         _tcpClient = new TcpClient ();
         _tcpClient.Client.Bind(_localEndPoint);
+        onLogEvent?.Invoke($"LocalEndPoint : {_localEndPoint}");
         _tcpClient.Connect(_uri.DnsSafeHost, _uri.Port);
+        onLogEvent?.Invoke($"Connect to {_uri}");
         _stream = _tcpClient.GetStream ();
       }
 

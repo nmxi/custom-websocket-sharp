@@ -33,9 +33,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using WebSocketSharp.Net;
+using CustomWebSocketSharp.Net;
 
-namespace WebSocketSharp
+namespace CustomWebSocketSharp
 {
   internal abstract class HttpBase
   {

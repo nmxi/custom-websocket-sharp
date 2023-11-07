@@ -44,10 +44,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 using System.Text;
 using System.Threading;
-using WebSocketSharp.Net;
-using WebSocketSharp.Net.WebSockets;
+using CustomWebSocketSharp.Net;
+using CustomWebSocketSharp.Net.WebSockets;
 
-namespace WebSocketSharp.Server
+namespace CustomWebSocketSharp.Server
 {
   /// <summary>
   /// Provides a simple HTTP server.
@@ -328,7 +328,7 @@ namespace WebSocketSharp.Server
     /// </remarks>
     /// <value>
     ///   <para>
-    ///   One of the <see cref="WebSocketSharp.Net.AuthenticationSchemes"/>
+    ///   One of the <see cref="CustomWebSocketSharp.Net.AuthenticationSchemes"/>
     ///   enum values.
     ///   </para>
     ///   <para>
@@ -336,7 +336,7 @@ namespace WebSocketSharp.Server
     ///   </para>
     ///   <para>
     ///   The default value is
-    ///   <see cref="WebSocketSharp.Net.AuthenticationSchemes.Anonymous"/>.
+    ///   <see cref="CustomWebSocketSharp.Net.AuthenticationSchemes.Anonymous"/>.
     ///   </para>
     /// </value>
     public AuthenticationSchemes AuthenticationSchemes {

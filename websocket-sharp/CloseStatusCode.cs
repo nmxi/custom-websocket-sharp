@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp
+namespace CustomWebSocketSharp
 {
   /// <summary>
   /// Indicates the status code for the WebSocket connection close.

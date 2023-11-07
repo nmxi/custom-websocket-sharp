@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp
+namespace CustomWebSocketSharp
 {
   /// <summary>
   /// Represents the event data for the <see cref="WebSocket.OnMessage"/> event.

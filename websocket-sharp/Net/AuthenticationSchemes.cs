@@ -39,7 +39,7 @@
 
 using System;
 
-namespace WebSocketSharp.Net
+namespace CustomWebSocketSharp.Net
 {
   /// <summary>
   /// Specifies the scheme for authentication.

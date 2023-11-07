@@ -43,7 +43,7 @@ using System.Net.Sockets;
 using System.Security.Principal;
 using System.Text;
 
-namespace WebSocketSharp.Net.WebSockets
+namespace CustomWebSocketSharp.Net.WebSockets
 {
   /// <summary>
   /// Provides the access to the information in a WebSocket handshake request
@@ -137,7 +137,7 @@ namespace WebSocketSharp.Net.WebSockets
     /// </summary>
     /// <value>
     ///   <para>
-    ///   A <see cref="WebSocketSharp.Net.CookieCollection"/> that contains
+    ///   A <see cref="CustomWebSocketSharp.Net.CookieCollection"/> that contains
     ///   the cookies.
     ///   </para>
     ///   <para>
@@ -424,7 +424,7 @@ namespace WebSocketSharp.Net.WebSockets
     /// the client and server.
     /// </summary>
     /// <value>
-    /// A <see cref="WebSocketSharp.WebSocket"/> that represents the interface.
+    /// A <see cref="CustomWebSocketSharp.WebSocket"/> that represents the interface.
     /// </value>
     public override WebSocket WebSocket {
       get {

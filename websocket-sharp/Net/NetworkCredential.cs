@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp.Net
+namespace CustomWebSocketSharp.Net
 {
   /// <summary>
   /// Provides the credentials for the password-based authentication.

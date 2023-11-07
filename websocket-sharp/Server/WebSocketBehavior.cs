@@ -30,10 +30,10 @@ using System;
 using System.Collections.Specialized;
 using System.IO;
 using System.Security.Principal;
-using WebSocketSharp.Net;
-using WebSocketSharp.Net.WebSockets;
+using CustomWebSocketSharp.Net;
+using CustomWebSocketSharp.Net.WebSockets;
 
-namespace WebSocketSharp.Server
+namespace CustomWebSocketSharp.Server
 {
   /// <summary>
   /// Exposes a set of methods and properties used to define the behavior of
@@ -1432,7 +1432,7 @@ namespace WebSocketSharp.Server
     /// </summary>
     /// <value>
     ///   <para>
-    ///   A <see cref="WebSocketSharp.WebSocket"/> that represents
+    ///   A <see cref="CustomWebSocketSharp.WebSocket"/> that represents
     ///   the interface.
     ///   </para>
     ///   <para>

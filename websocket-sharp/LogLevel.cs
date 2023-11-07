@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp
+namespace CustomWebSocketSharp
 {
   /// <summary>
   /// Specifies the logging level.

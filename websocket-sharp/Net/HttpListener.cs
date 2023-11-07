@@ -52,7 +52,7 @@ using System.Security.Principal;
 using System.Threading;
 
 // TODO: Logging.
-namespace WebSocketSharp.Net
+namespace CustomWebSocketSharp.Net
 {
   /// <summary>
   /// Provides a simple, programmatically controlled HTTP listener.
@@ -146,7 +146,7 @@ namespace WebSocketSharp.Net
     /// </summary>
     /// <value>
     ///   <para>
-    ///   One of the <see cref="WebSocketSharp.Net.AuthenticationSchemes"/>
+    ///   One of the <see cref="CustomWebSocketSharp.Net.AuthenticationSchemes"/>
     ///   enum values.
     ///   </para>
     ///   <para>
@@ -154,7 +154,7 @@ namespace WebSocketSharp.Net
     ///   </para>
     ///   <para>
     ///   The default value is
-    ///   <see cref="WebSocketSharp.Net.AuthenticationSchemes.Anonymous"/>.
+    ///   <see cref="CustomWebSocketSharp.Net.AuthenticationSchemes.Anonymous"/>.
     ///   </para>
     /// </value>
     /// <exception cref="ObjectDisposedException">

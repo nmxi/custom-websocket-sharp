@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp.Server
+namespace CustomWebSocketSharp.Server
 {
   /// <summary>
   /// Exposes the access to the information in a WebSocket session.
@@ -58,7 +58,7 @@ namespace WebSocketSharp.Server
     /// Gets the WebSocket interface for the session.
     /// </summary>
     /// <value>
-    /// A <see cref="WebSocketSharp.WebSocket"/> that represents the interface.
+    /// A <see cref="CustomWebSocketSharp.WebSocket"/> that represents the interface.
     /// </value>
     WebSocket WebSocket { get; }
 

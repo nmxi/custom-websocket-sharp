@@ -28,7 +28,7 @@
 
 using System;
 
-namespace WebSocketSharp.Net
+namespace CustomWebSocketSharp.Net
 {
   internal class HttpHeaderInfo
   {

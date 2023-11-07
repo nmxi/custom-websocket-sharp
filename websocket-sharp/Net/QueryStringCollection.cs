@@ -44,7 +44,7 @@ using System;
 using System.Collections.Specialized;
 using System.Text;
 
-namespace WebSocketSharp.Net
+namespace CustomWebSocketSharp.Net
 {
   internal sealed class QueryStringCollection : NameValueCollection
   {
