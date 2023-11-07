@@ -2285,10 +2285,9 @@ namespace WebSocketSharp
     private void setClientStream ()
     {
       if (_proxyUri != null) {
-        _tcpClient = new TcpClient(_localEndPoint);
-        _tcpClient.Connect(_proxyUri.DnsSafeHost, _proxyUri.Port);
-        onLogEvent?.Invoke($"Local End Point is {_localEndPoint}");
-        //_tcpClient = new TcpClient (_proxyUri.DnsSafeHost, _proxyUri.Port);
+        _tcpClient = new TcpClient();
+        _tcpClient.Client.Bind(_localEndPoint);
+        _tcpClient.Connect(_uri.DnsSafeHost, _uri.Port);
         _stream = _tcpClient.GetStream ();
 
         var res = sendProxyConnectRequest ();
